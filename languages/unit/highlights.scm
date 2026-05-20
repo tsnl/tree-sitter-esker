@@ -13,6 +13,7 @@
 
 (Bind__eq) @operator
 (LambdaExpr__arrow) @operator
+(ArrowExpr__arrow) @operator
 
 ; ------------------------------------------------------------------
 ; Arithmetic / comparison / shift / unary operators

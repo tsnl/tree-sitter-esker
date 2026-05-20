@@ -593,6 +593,19 @@
         }
       ]
     },
+    "Expr_ArrowExpr": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ArrowExpr"
+          }
+        }
+      ]
+    },
     "Expr": {
       "type": "CHOICE",
       "members": [
@@ -655,6 +668,10 @@
         {
           "type": "SYMBOL",
           "name": "Expr_CmpExpr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "Expr_ArrowExpr"
         }
       ]
     },
@@ -1685,6 +1702,43 @@
           "name": "CmpOp_Ne"
         }
       ]
+    },
+    "ArrowExpr__arrow": {
+      "type": "STRING",
+      "value": "->"
+    },
+    "ArrowExpr": {
+      "type": "PREC_RIGHT",
+      "value": 2,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "lhs",
+            "content": {
+              "type": "SYMBOL",
+              "name": "Expr"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "_arrow",
+            "content": {
+              "type": "SYMBOL",
+              "name": "ArrowExpr__arrow"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "rhs",
+            "content": {
+              "type": "SYMBOL",
+              "name": "Expr"
+            }
+          }
+        ]
+      }
     },
     "RecordExpr__lb": {
       "type": "STRING",
