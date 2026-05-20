@@ -8,4 +8,4 @@ languages = ["languages/unit"]
 
 [grammars.unit]
 repository = "https://github.com/tsnl/tree-sitter-unit"
-rev = "main"
+rev = "63e4b3c7f23b1cfb1a22c82583b2311b182f1516"
