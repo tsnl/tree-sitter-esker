@@ -1,5 +1,0 @@
-(ParenExpr  "(" @open ")" @close)
-(IfExpr     "(" @open ")" @close)
-(RecordExpr "{" @open "}" @close)
-(ArrayExpr  "[" @open "]" @close)
-(LambdaExpr "|" @open "|" @close)
