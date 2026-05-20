@@ -1074,14 +1074,53 @@
           },
           {
             "type": "FIELD",
-            "name": "name",
+            "name": "field",
             "content": {
               "type": "SYMBOL",
-              "name": "Ident"
+              "name": "DotField"
             }
           }
         ]
       }
+    },
+    "DotField_Name": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "Ident"
+          }
+        }
+      ]
+    },
+    "DotField_Index": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "LitNumber"
+          }
+        }
+      ]
+    },
+    "DotField": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "DotField_Name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "DotField_Index"
+        }
+      ]
     },
     "CallExpr": {
       "type": "PREC_LEFT",
