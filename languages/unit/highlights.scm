@@ -13,7 +13,7 @@
 
 (Bind__eq) @operator
 (LambdaExpr__arrow) @operator
-(ArrowExpr__arrow) @operator
+(ArrowBinary__arrow) @operator
 
 ; ------------------------------------------------------------------
 ; Arithmetic / comparison / shift / unary operators
@@ -78,12 +78,13 @@
 (BindDef__semi) @punctuation.delimiter
 (LetExpr__semi) @punctuation.delimiter
 (MetavarDef__semi) @punctuation.delimiter
-(ConsElement__c) @punctuation.delimiter
-(ConsField__c) @punctuation.delimiter
-(ConsParam__c) @punctuation.delimiter
-(ConsTupleElem__c) @punctuation.delimiter
-(TupleHead__c) @punctuation.delimiter
+(OneTuple__c) @punctuation.delimiter
+(NTuple__c) @punctuation.delimiter
+(ArrayExpr_elements_vec_delimiter) @punctuation.delimiter
+(RecordExpr_fields_vec_delimiter) @punctuation.delimiter
+(LambdaExpr_params_vec_delimiter) @punctuation.delimiter
 (MetavarDef_params_vec_delimiter) @punctuation.delimiter
+(NTuple_rest_vec_delimiter) @punctuation.delimiter
 
 ; ------------------------------------------------------------------
 ; Punctuation — brackets
