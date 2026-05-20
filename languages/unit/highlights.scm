@@ -77,10 +77,11 @@
 (BindDef__semi) @punctuation.delimiter
 (LetExpr__semi) @punctuation.delimiter
 (MetavarDef__semi) @punctuation.delimiter
-(ConsArg__c) @punctuation.delimiter
 (ConsElement__c) @punctuation.delimiter
 (ConsField__c) @punctuation.delimiter
 (ConsParam__c) @punctuation.delimiter
+(ConsTupleElem__c) @punctuation.delimiter
+(TupleHead__c) @punctuation.delimiter
 (MetavarDef_params_vec_delimiter) @punctuation.delimiter
 
 ; ------------------------------------------------------------------
@@ -89,8 +90,6 @@
 
 (ParenExpr__lp) @punctuation.bracket
 (ParenExpr__rp) @punctuation.bracket
-(CallExpr__lp) @punctuation.bracket
-(CallExpr__rp) @punctuation.bracket
 (RecordExpr__lb) @punctuation.bracket
 (RecordExpr__rb) @punctuation.bracket
 (ArrayExpr__lb) @punctuation.bracket

@@ -1,5 +1,4 @@
 (ParenExpr (ParenExpr__lp) @open (ParenExpr__rp) @close)
-(CallExpr (CallExpr__lp) @open (CallExpr__rp) @close)
 (IfExpr (IfExpr__lp) @open (IfExpr__rp) @close)
 (RecordExpr (RecordExpr__lb) @open (RecordExpr__rb) @close)
 (ArrayExpr (ArrayExpr__lb) @open (ArrayExpr__rb) @close)
