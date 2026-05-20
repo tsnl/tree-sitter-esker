@@ -1,68 +1,101 @@
+; ------------------------------------------------------------------
 ; Keywords
-(Def__def) @keyword
+; ------------------------------------------------------------------
+
+(IfExpr__if) @keyword.conditional
+(IfExpr__else) @keyword.conditional
 (PubKw__pub) @keyword
-(TemplateArgs__for) @keyword
-(LetBind__let) @keyword
-(IfExpr__if) @keyword
-(IfExpr__else) @keyword
 
+; ------------------------------------------------------------------
+; Structural operators — `=` (bind) and `=>` (lambda body) get
+; full-fat operator coloring rather than being demoted to delimiter.
+; ------------------------------------------------------------------
+
+(Bind__eq) @operator
+(LambdaExpr__arrow) @operator
+
+; ------------------------------------------------------------------
+; Arithmetic / comparison / shift / unary operators
+; ------------------------------------------------------------------
+
+(AddOp_Add_0) @operator
+(AddOp_Sub_0) @operator
+(MulOp_Mul_0) @operator
+(MulOp_Div_0) @operator
+(MulOp_Mod_0) @operator
+(MulOp_Matmul_0) @operator
+(UnaryOp_Pos_0) @operator
+(UnaryOp_Neg_0) @operator
+(UnaryOp_Not_0) @operator
+(CmpOp_Lt_0) @operator
+(CmpOp_Le_0) @operator
+(CmpOp_Gt_0) @operator
+(CmpOp_Ge_0) @operator
+(CmpOp_Eq_0) @operator
+(CmpOp_Ne_0) @operator
+(ShiftOp_Shl_0) @operator
+(ShiftOp_Shr_0) @operator
+
+; ------------------------------------------------------------------
 ; Literals
-(Expr_Bool_0) @boolean
-(Expr_Number_0) @number
-(Expr_Str_0) @string
-(Comment__c) @comment
+; ------------------------------------------------------------------
 
-; Identifiers — builtin or uppercase names as types, everything else as a variable
-(Ident_name) @variable
-((Ident_name) @type
-  (#any-of? @type "type" "unit" "bool" "int" "float" "usize" "struct" "Ten"))
+(LitBool) @boolean
+(LitNumber) @number
+(LitString) @string
+(Comment) @comment
+
+; ------------------------------------------------------------------
+; Identifiers
+;   - dunder names      → @function.builtin
+;   - known primitives  → @type.builtin
+;   - capitalized names → @type
+;   - everything else   → @variable
+; ------------------------------------------------------------------
+
+((Ident_name) @function.builtin
+  (#match? @function.builtin "^__.*__$"))
+
+((Ident_name) @type.builtin
+  (#any-of? @type.builtin
+    "type" "unit" "bool" "int" "float" "usize" "isize" "string"
+    "struct" "enum" "Fn" "Ten"))
+
 ((Ident_name) @type
   (#match? @type "^[A-Z]"))
 
-; Operators
-(Expr_Add_1) @operator
-(Expr_Sub_1) @operator
-(Expr_Mul_1) @operator
-(Expr_Div_1) @operator
-(Expr_Mod_1) @operator
-(Expr_Matmul_1) @operator
-(Expr_Pos_0) @operator
-(Expr_Neg_0) @operator
-(Expr_Not_0) @operator
-(Expr_Lt_1) @operator
-(Expr_Le_1) @operator
-(Expr_Gt_1) @operator
-(Expr_Ge_1) @operator
-(Expr_Eq_1) @operator
-(Expr_Ne_1) @operator
-(Expr_Shl_1) @operator
-(Expr_Shr_1) @operator
+(Ident_name) @variable
 
-; Punctuation
-(Expr_Field__dot) @punctuation.delimiter
-(Record__dot) @punctuation.delimiter
-(Def__lp) @punctuation.bracket
-(Def__rp) @punctuation.bracket
-(Expr_Call__lp) @punctuation.bracket
-(Expr_Call__rp) @punctuation.bracket
-(Expr_Paren_0) @punctuation.bracket
-(Expr_Paren_2) @punctuation.bracket
-(Expr_Unit_0) @punctuation.bracket
-(Expr_Unit_1) @punctuation.bracket
-(Chain__lb) @punctuation.bracket
-(Chain__rb) @punctuation.bracket
-(Record__lb) @punctuation.bracket
-(Record__rb) @punctuation.bracket
-(Array__lb) @punctuation.bracket
-(Array__rb) @punctuation.bracket
-(Def__semi) @punctuation.delimiter
-(BoundLet__semi) @punctuation.delimiter
-(Def__eq) @punctuation.delimiter
-(LetBind__eq) @punctuation.delimiter
-(Val__colon) @punctuation.delimiter
-(RetTy__colon) @punctuation.delimiter
-(Def_args_vec_delimiter) @punctuation.delimiter
-(TemplateArgs_args_vec_delimiter) @punctuation.delimiter
-(Record_fields_vec_delimiter) @punctuation.delimiter
-(Array_elements_vec_delimiter) @punctuation.delimiter
-(Expr_Call_args_vec_delimiter) @punctuation.delimiter
+; ------------------------------------------------------------------
+; Punctuation — delimiters
+; ------------------------------------------------------------------
+
+(DotExpr__dot) @punctuation.delimiter
+(Field__colon) @punctuation.delimiter
+(TypeAnno__colon) @punctuation.delimiter
+(TypedName__colon) @punctuation.delimiter
+(BindDef__semi) @punctuation.delimiter
+(LetExpr__semi) @punctuation.delimiter
+(MetavarDef__semi) @punctuation.delimiter
+(ConsArg__c) @punctuation.delimiter
+(ConsElement__c) @punctuation.delimiter
+(ConsField__c) @punctuation.delimiter
+(ConsParam__c) @punctuation.delimiter
+(MetavarDef_params_vec_delimiter) @punctuation.delimiter
+
+; ------------------------------------------------------------------
+; Punctuation — brackets
+; ------------------------------------------------------------------
+
+(ParenExpr__lp) @punctuation.bracket
+(ParenExpr__rp) @punctuation.bracket
+(CallExpr__lp) @punctuation.bracket
+(CallExpr__rp) @punctuation.bracket
+(RecordExpr__lb) @punctuation.bracket
+(RecordExpr__rb) @punctuation.bracket
+(ArrayExpr__lb) @punctuation.bracket
+(ArrayExpr__rb) @punctuation.bracket
+(IfExpr__lp) @punctuation.bracket
+(IfExpr__rp) @punctuation.bracket
+(LambdaExpr__lpipe) @punctuation.bracket
+(LambdaExpr__rpipe) @punctuation.bracket

@@ -1,3 +1,4 @@
-(Chain (Chain__lb) @indent (Chain__rb) @outdent)
-(Array (Array__lb) @indent (Array__rb) @outdent)
-(Record (Record__lb) @indent (Record__rb) @outdent)
+(ParenExpr (ParenExpr__lp) @indent (ParenExpr__rp) @outdent)
+(CallExpr (CallExpr__lp) @indent (CallExpr__rp) @outdent)
+(RecordExpr (RecordExpr__lb) @indent (RecordExpr__rb) @outdent)
+(ArrayExpr (ArrayExpr__lb) @indent (ArrayExpr__rb) @outdent)
