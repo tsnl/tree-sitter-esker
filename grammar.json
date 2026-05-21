@@ -65,6 +65,19 @@
         }
       ]
     },
+    "FileDef_ExprStmt": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ExprStmt"
+          }
+        }
+      ]
+    },
     "FileDef": {
       "type": "CHOICE",
       "members": [
@@ -75,6 +88,10 @@
         {
           "type": "SYMBOL",
           "name": "FileDef_MetavarDef"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "FileDef_ExprStmt"
         }
       ]
     },
@@ -165,6 +182,14 @@
       "members": [
         {
           "type": "FIELD",
+          "name": "var_kw",
+          "content": {
+            "type": "SYMBOL",
+            "name": "VarKw"
+          }
+        },
+        {
+          "type": "FIELD",
           "name": "params",
           "content": {
             "type": "SYMBOL",
@@ -177,6 +202,51 @@
           "content": {
             "type": "SYMBOL",
             "name": "MetavarDef__semi"
+          }
+        }
+      ]
+    },
+    "ExprStmt__eq": {
+      "type": "STRING",
+      "value": "="
+    },
+    "ExprStmt__semi": {
+      "type": "STRING",
+      "value": ";"
+    },
+    "ExprStmt": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "Ident"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "_eq",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ExprStmt__eq"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "expr",
+          "content": {
+            "type": "SYMBOL",
+            "name": "Expr"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "_semi",
+          "content": {
+            "type": "SYMBOL",
+            "name": "ExprStmt__semi"
           }
         }
       ]
@@ -198,9 +268,26 @@
         }
       ]
     },
-    "Bind__eq": {
+    "VarKw__var": {
       "type": "STRING",
-      "value": "="
+      "value": "var"
+    },
+    "VarKw": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "_var",
+          "content": {
+            "type": "SYMBOL",
+            "name": "VarKw__var"
+          }
+        }
+      ]
+    },
+    "Bind__colon": {
+      "type": "STRING",
+      "value": ":"
     },
     "Bind": {
       "type": "SEQ",
@@ -215,10 +302,10 @@
         },
         {
           "type": "FIELD",
-          "name": "_eq",
+          "name": "_colon",
           "content": {
             "type": "SYMBOL",
-            "name": "Bind__eq"
+            "name": "Bind__colon"
           }
         },
         {
@@ -837,7 +924,7 @@
     },
     "CmpOp_Eq_0": {
       "type": "STRING",
-      "value": "=="
+      "value": "="
     },
     "CmpOp_Eq": {
       "type": "SEQ",
@@ -854,7 +941,7 @@
     },
     "CmpOp_Ne_0": {
       "type": "STRING",
-      "value": "!="
+      "value": "<>"
     },
     "CmpOp_Ne": {
       "type": "SEQ",
