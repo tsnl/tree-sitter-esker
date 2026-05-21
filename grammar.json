@@ -65,19 +65,6 @@
         }
       ]
     },
-    "FileDef_ExprStmt": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "ExprStmt"
-          }
-        }
-      ]
-    },
     "FileDef": {
       "type": "CHOICE",
       "members": [
@@ -88,10 +75,6 @@
         {
           "type": "SYMBOL",
           "name": "FileDef_MetavarDef"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "FileDef_ExprStmt"
         }
       ]
     },
@@ -202,51 +185,6 @@
           "content": {
             "type": "SYMBOL",
             "name": "MetavarDef__semi"
-          }
-        }
-      ]
-    },
-    "ExprStmt__eq": {
-      "type": "STRING",
-      "value": "="
-    },
-    "ExprStmt__semi": {
-      "type": "STRING",
-      "value": ";"
-    },
-    "ExprStmt": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "name",
-          "content": {
-            "type": "SYMBOL",
-            "name": "Ident"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "_eq",
-          "content": {
-            "type": "SYMBOL",
-            "name": "ExprStmt__eq"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "expr",
-          "content": {
-            "type": "SYMBOL",
-            "name": "Expr"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "_semi",
-          "content": {
-            "type": "SYMBOL",
-            "name": "ExprStmt__semi"
           }
         }
       ]
