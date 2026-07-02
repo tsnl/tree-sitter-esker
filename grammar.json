@@ -1,17 +1,25 @@
 {
   "name": "unit",
-  "word": "CstIdent_name",
+  "word": "CstIdentifier_name",
   "rules": {
     "source_file": {
       "type": "SEQ",
       "members": [
         {
-          "type": "FIELD",
-          "name": "defs",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstFile_defs_vec_contents"
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "BLANK"
+            },
+            {
+              "type": "FIELD",
+              "name": "defs",
+              "content": {
+                "type": "SYMBOL",
+                "name": "CstFile_defs_vec_contents"
+              }
+            }
+          ]
         }
       ]
     },
@@ -30,12 +38,20 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "FIELD",
-          "name": "defs",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstFile_defs_vec_contents"
-          }
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "BLANK"
+            },
+            {
+              "type": "FIELD",
+              "name": "defs",
+              "content": {
+                "type": "SYMBOL",
+                "name": "CstFile_defs_vec_contents"
+              }
+            }
+          ]
         }
       ]
     },
@@ -235,7 +251,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "CstIdent"
+            "name": "CstIdentifier"
           }
         },
         {
@@ -268,7 +284,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "CstIdent"
+            "name": "CstIdentifier"
           }
         },
         {
@@ -297,7 +313,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "CstIdent"
+            "name": "CstIdentifier"
           }
         },
         {
@@ -311,18 +327,18 @@
               "name": "ty_anno",
               "content": {
                 "type": "SYMBOL",
-                "name": "CstTypeAnno"
+                "name": "CstTypeAnnotation"
               }
             }
           ]
         }
       ]
     },
-    "CstTypeAnno__colon": {
+    "CstTypeAnnotation__colon": {
       "type": "STRING",
       "value": ":"
     },
-    "CstTypeAnno": {
+    "CstTypeAnnotation": {
       "type": "SEQ",
       "members": [
         {
@@ -330,7 +346,7 @@
           "name": "_colon",
           "content": {
             "type": "SYMBOL",
-            "name": "CstTypeAnno__colon"
+            "name": "CstTypeAnnotation__colon"
           }
         },
         {
@@ -652,7 +668,7 @@
           "name": "0",
           "content": {
             "type": "SYMBOL",
-            "name": "CstCmpExpr"
+            "name": "CstCompareExpr"
           }
         }
       ]
@@ -698,7 +714,7 @@
             "name": "lhs",
             "content": {
               "type": "SYMBOL",
-              "name": "CstCmpExpr"
+              "name": "CstCompareExpr"
             }
           },
           {
@@ -720,7 +736,7 @@
         ]
       }
     },
-    "CstCmpExpr_Higher": {
+    "CstCompareExpr_Higher": {
       "type": "SEQ",
       "members": [
         {
@@ -733,7 +749,7 @@
         }
       ]
     },
-    "CstCmpExpr_Binary": {
+    "CstCompareExpr_Binary": {
       "type": "SEQ",
       "members": [
         {
@@ -741,25 +757,25 @@
           "name": "0",
           "content": {
             "type": "SYMBOL",
-            "name": "CstCmpBinary"
+            "name": "CstCompareBinary"
           }
         }
       ]
     },
-    "CstCmpExpr": {
+    "CstCompareExpr": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "CstCmpExpr_Higher"
+          "name": "CstCompareExpr_Higher"
         },
         {
           "type": "SYMBOL",
-          "name": "CstCmpExpr_Binary"
+          "name": "CstCompareExpr_Binary"
         }
       ]
     },
-    "CstCmpBinary": {
+    "CstCompareBinary": {
       "type": "PREC_LEFT",
       "value": 1,
       "content": {
@@ -770,7 +786,7 @@
             "name": "lhs",
             "content": {
               "type": "SYMBOL",
-              "name": "CstCmpExpr"
+              "name": "CstCompareExpr"
             }
           },
           {
@@ -1555,7 +1571,7 @@
           "name": "0",
           "content": {
             "type": "SYMBOL",
-            "name": "CstIdent"
+            "name": "CstIdentifier"
           }
         }
       ]
@@ -1680,6 +1696,19 @@
         }
       ]
     },
+    "CstPrimaryExpr_Intrinsic": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIntrinsicType"
+          }
+        }
+      ]
+    },
     "CstPrimaryExpr_Name": {
       "type": "SEQ",
       "members": [
@@ -1688,7 +1717,7 @@
           "name": "0",
           "content": {
             "type": "SYMBOL",
-            "name": "CstIdent"
+            "name": "CstIdentifier"
           }
         }
       ]
@@ -1741,6 +1770,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "CstPrimaryExpr_Intrinsic"
+        },
+        {
+          "type": "SYMBOL",
           "name": "CstPrimaryExpr_Name"
         },
         {
@@ -1757,7 +1790,36 @@
         }
       ]
     },
-    "CstLiteralExpr_Bool": {
+    "CstLiteralExpr": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "kind",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstLiteralKind"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "BLANK"
+            },
+            {
+              "type": "FIELD",
+              "name": "type_hint",
+              "content": {
+                "type": "SYMBOL",
+                "name": "CstIntrinsicType"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "CstLiteralKind_Bool": {
       "type": "SEQ",
       "members": [
         {
@@ -1770,7 +1832,7 @@
         }
       ]
     },
-    "CstLiteralExpr_Number": {
+    "CstLiteralKind_Number": {
       "type": "SEQ",
       "members": [
         {
@@ -1783,7 +1845,7 @@
         }
       ]
     },
-    "CstLiteralExpr_String": {
+    "CstLiteralKind_String": {
       "type": "SEQ",
       "members": [
         {
@@ -1796,37 +1858,20 @@
         }
       ]
     },
-    "CstLiteralExpr_Type": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstLitType"
-          }
-        }
-      ]
-    },
-    "CstLiteralExpr": {
+    "CstLiteralKind": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "CstLiteralExpr_Bool"
+          "name": "CstLiteralKind_Bool"
         },
         {
           "type": "SYMBOL",
-          "name": "CstLiteralExpr_Number"
+          "name": "CstLiteralKind_Number"
         },
         {
           "type": "SYMBOL",
-          "name": "CstLiteralExpr_String"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstLiteralExpr_Type"
+          "name": "CstLiteralKind_String"
         }
       ]
     },
@@ -2120,7 +2165,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "CstIdent"
+            "name": "CstIdentifier"
           }
         },
         {
@@ -2223,11 +2268,11 @@
         }
       ]
     },
-    "CstIdent_name": {
+    "CstIdentifier_name": {
       "type": "PATTERN",
       "value": "[a-zA-Z_][a-zA-Z0-9_]*"
     },
-    "CstIdent": {
+    "CstIdentifier": {
       "type": "SEQ",
       "members": [
         {
@@ -2235,7 +2280,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "CstIdent_name"
+            "name": "CstIdentifier_name"
           }
         }
       ]
@@ -2287,263 +2332,6 @@
         }
       ]
     },
-    "CstLitType_Int_0": {
-      "type": "STRING",
-      "value": "int"
-    },
-    "CstLitType_Int": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstLitType_Int_0"
-          }
-        }
-      ]
-    },
-    "CstLitType_Float_0": {
-      "type": "STRING",
-      "value": "float"
-    },
-    "CstLitType_Float": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstLitType_Float_0"
-          }
-        }
-      ]
-    },
-    "CstLitType_I8_0": {
-      "type": "STRING",
-      "value": "i8"
-    },
-    "CstLitType_I8": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstLitType_I8_0"
-          }
-        }
-      ]
-    },
-    "CstLitType_I16_0": {
-      "type": "STRING",
-      "value": "i16"
-    },
-    "CstLitType_I16": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstLitType_I16_0"
-          }
-        }
-      ]
-    },
-    "CstLitType_I32_0": {
-      "type": "STRING",
-      "value": "i32"
-    },
-    "CstLitType_I32": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstLitType_I32_0"
-          }
-        }
-      ]
-    },
-    "CstLitType_I64_0": {
-      "type": "STRING",
-      "value": "i64"
-    },
-    "CstLitType_I64": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstLitType_I64_0"
-          }
-        }
-      ]
-    },
-    "CstLitType_F32_0": {
-      "type": "STRING",
-      "value": "f32"
-    },
-    "CstLitType_F32": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstLitType_F32_0"
-          }
-        }
-      ]
-    },
-    "CstLitType_F64_0": {
-      "type": "STRING",
-      "value": "f64"
-    },
-    "CstLitType_F64": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstLitType_F64_0"
-          }
-        }
-      ]
-    },
-    "CstLitType_Usize_0": {
-      "type": "STRING",
-      "value": "usize"
-    },
-    "CstLitType_Usize": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstLitType_Usize_0"
-          }
-        }
-      ]
-    },
-    "CstLitType_Bool_0": {
-      "type": "STRING",
-      "value": "bool"
-    },
-    "CstLitType_Bool": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstLitType_Bool_0"
-          }
-        }
-      ]
-    },
-    "CstLitType_String_0": {
-      "type": "STRING",
-      "value": "string"
-    },
-    "CstLitType_String": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstLitType_String_0"
-          }
-        }
-      ]
-    },
-    "CstLitType_Type_0": {
-      "type": "STRING",
-      "value": "type"
-    },
-    "CstLitType_Type": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstLitType_Type_0"
-          }
-        }
-      ]
-    },
-    "CstLitType": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "CstLitType_Int"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstLitType_Float"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstLitType_I8"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstLitType_I16"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstLitType_I32"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstLitType_I64"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstLitType_F32"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstLitType_F64"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstLitType_Usize"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstLitType_Bool"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstLitType_String"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstLitType_Type"
-        }
-      ]
-    },
     "CstLitNumber_raw": {
       "type": "PATTERN",
       "value": "[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?"
@@ -2575,6 +2363,200 @@
             "type": "SYMBOL",
             "name": "CstLitString_raw"
           }
+        }
+      ]
+    },
+    "CstIntrinsicType_I8_0": {
+      "type": "STRING",
+      "value": "i8"
+    },
+    "CstIntrinsicType_I8": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIntrinsicType_I8_0"
+          }
+        }
+      ]
+    },
+    "CstIntrinsicType_I16_0": {
+      "type": "STRING",
+      "value": "i16"
+    },
+    "CstIntrinsicType_I16": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIntrinsicType_I16_0"
+          }
+        }
+      ]
+    },
+    "CstIntrinsicType_I32_0": {
+      "type": "STRING",
+      "value": "i32"
+    },
+    "CstIntrinsicType_I32": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIntrinsicType_I32_0"
+          }
+        }
+      ]
+    },
+    "CstIntrinsicType_I64_0": {
+      "type": "STRING",
+      "value": "i64"
+    },
+    "CstIntrinsicType_I64": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIntrinsicType_I64_0"
+          }
+        }
+      ]
+    },
+    "CstIntrinsicType_F32_0": {
+      "type": "STRING",
+      "value": "f32"
+    },
+    "CstIntrinsicType_F32": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIntrinsicType_F32_0"
+          }
+        }
+      ]
+    },
+    "CstIntrinsicType_F64_0": {
+      "type": "STRING",
+      "value": "f64"
+    },
+    "CstIntrinsicType_F64": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIntrinsicType_F64_0"
+          }
+        }
+      ]
+    },
+    "CstIntrinsicType_Bool_0": {
+      "type": "STRING",
+      "value": "bool"
+    },
+    "CstIntrinsicType_Bool": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIntrinsicType_Bool_0"
+          }
+        }
+      ]
+    },
+    "CstIntrinsicType_String_0": {
+      "type": "STRING",
+      "value": "string"
+    },
+    "CstIntrinsicType_String": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIntrinsicType_String_0"
+          }
+        }
+      ]
+    },
+    "CstIntrinsicType_Type_0": {
+      "type": "STRING",
+      "value": "type"
+    },
+    "CstIntrinsicType_Type": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIntrinsicType_Type_0"
+          }
+        }
+      ]
+    },
+    "CstIntrinsicType": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "CstIntrinsicType_I8"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstIntrinsicType_I16"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstIntrinsicType_I32"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstIntrinsicType_I64"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstIntrinsicType_F32"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstIntrinsicType_F64"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstIntrinsicType_Bool"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstIntrinsicType_String"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstIntrinsicType_Type"
         }
       ]
     },
