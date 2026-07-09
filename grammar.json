@@ -102,22 +102,6 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "BLANK"
-            },
-            {
-              "type": "FIELD",
-              "name": "is_pub",
-              "content": {
-                "type": "SYMBOL",
-                "name": "CstPubKw"
-              }
-            }
-          ]
-        },
-        {
           "type": "FIELD",
           "name": "bind",
           "content": {
@@ -201,23 +185,6 @@
           "content": {
             "type": "SYMBOL",
             "name": "CstMetavarDef__semi"
-          }
-        }
-      ]
-    },
-    "CstPubKw__pub": {
-      "type": "STRING",
-      "value": "pub"
-    },
-    "CstPubKw": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "_pub",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstPubKw__pub"
           }
         }
       ]
