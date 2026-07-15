@@ -30,7 +30,7 @@
         "name": "CstFile_defs_vec_element",
         "content": {
           "type": "SYMBOL",
-          "name": "CstFileDef"
+          "name": "CstBindDef"
         }
       }
     },
@@ -55,45 +55,6 @@
         }
       ]
     },
-    "CstFileDef_BindDef": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstBindDef"
-          }
-        }
-      ]
-    },
-    "CstFileDef_MetavarDef": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstMetavarDef"
-          }
-        }
-      ]
-    },
-    "CstFileDef": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "CstFileDef_BindDef"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstFileDef_MetavarDef"
-        }
-      ]
-    },
     "CstBindDef__semi": {
       "type": "STRING",
       "value": ";"
@@ -115,93 +76,6 @@
           "content": {
             "type": "SYMBOL",
             "name": "CstBindDef__semi"
-          }
-        }
-      ]
-    },
-    "CstMetavarDef_params_vec_delimiter": {
-      "type": "STRING",
-      "value": ","
-    },
-    "CstMetavarDef_params_vec_contents": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "CstMetavarDef_params_vec_element",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstTypedName"
-          }
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "CstMetavarDef_params_vec_delimiter"
-              },
-              {
-                "type": "FIELD",
-                "name": "CstMetavarDef_params_vec_element",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "CstTypedName"
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "CstMetavarDef__semi": {
-      "type": "STRING",
-      "value": ";"
-    },
-    "CstMetavarDef": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "var_kw",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstVarKw"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "params",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstMetavarDef_params_vec_contents"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "_semi",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstMetavarDef__semi"
-          }
-        }
-      ]
-    },
-    "CstVarKw__var": {
-      "type": "STRING",
-      "value": "var"
-    },
-    "CstVarKw": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "_var",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstVarKw__var"
           }
         }
       ]
@@ -399,20 +273,116 @@
         }
       ]
     },
-    "CstLambdaExpr__lpipe": {
+    "CstLambdaExpr__lead": {
       "type": "STRING",
-      "value": "|"
+      "value": "\\"
     },
-    "CstLambdaExpr_params_vec_delimiter": {
-      "type": "STRING",
-      "value": ","
-    },
-    "CstLambdaExpr_params_vec_contents": {
+    "CstLambdaExpr": {
       "type": "SEQ",
       "members": [
         {
           "type": "FIELD",
-          "name": "CstLambdaExpr_params_vec_element",
+          "name": "_lead",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstLambdaExpr__lead"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "BLANK"
+            },
+            {
+              "type": "FIELD",
+              "name": "quantifiers",
+              "content": {
+                "type": "SYMBOL",
+                "name": "CstQuantifierList"
+              }
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "BLANK"
+            },
+            {
+              "type": "FIELD",
+              "name": "params",
+              "content": {
+                "type": "SYMBOL",
+                "name": "CstLambdaParams"
+              }
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "body",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstLambdaBody"
+          }
+        }
+      ]
+    },
+    "CstLambdaBody_Paren": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstParenExpr"
+          }
+        }
+      ]
+    },
+    "CstLambdaBody_Lambda": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstLambdaExpr"
+          }
+        }
+      ]
+    },
+    "CstLambdaBody": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "CstLambdaBody_Paren"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstLambdaBody_Lambda"
+        }
+      ]
+    },
+    "CstLambdaParams__lpipe": {
+      "type": "STRING",
+      "value": "|"
+    },
+    "CstLambdaParams_params_vec_delimiter": {
+      "type": "STRING",
+      "value": ","
+    },
+    "CstLambdaParams_params_vec_contents": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "CstLambdaParams_params_vec_element",
           "content": {
             "type": "SYMBOL",
             "name": "CstLambdaParam"
@@ -425,11 +395,11 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "CstLambdaExpr_params_vec_delimiter"
+                "name": "CstLambdaParams_params_vec_delimiter"
               },
               {
                 "type": "FIELD",
-                "name": "CstLambdaExpr_params_vec_element",
+                "name": "CstLambdaParams_params_vec_element",
                 "content": {
                   "type": "SYMBOL",
                   "name": "CstLambdaParam"
@@ -440,15 +410,11 @@
         }
       ]
     },
-    "CstLambdaExpr__rpipe": {
+    "CstLambdaParams__rpipe": {
       "type": "STRING",
       "value": "|"
     },
-    "CstLambdaExpr__arrow": {
-      "type": "STRING",
-      "value": "=>"
-    },
-    "CstLambdaExpr": {
+    "CstLambdaParams": {
       "type": "SEQ",
       "members": [
         {
@@ -456,7 +422,7 @@
           "name": "_lpipe",
           "content": {
             "type": "SYMBOL",
-            "name": "CstLambdaExpr__lpipe"
+            "name": "CstLambdaParams__lpipe"
           }
         },
         {
@@ -470,7 +436,7 @@
               "name": "params",
               "content": {
                 "type": "SYMBOL",
-                "name": "CstLambdaExpr_params_vec_contents"
+                "name": "CstLambdaParams_params_vec_contents"
               }
             }
           ]
@@ -480,23 +446,81 @@
           "name": "_rpipe",
           "content": {
             "type": "SYMBOL",
-            "name": "CstLambdaExpr__rpipe"
+            "name": "CstLambdaParams__rpipe"
+          }
+        }
+      ]
+    },
+    "CstQuantifierList__lb": {
+      "type": "STRING",
+      "value": "["
+    },
+    "CstQuantifierList_params_vec_delimiter": {
+      "type": "STRING",
+      "value": ","
+    },
+    "CstQuantifierList_params_vec_contents": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "CstQuantifierList_params_vec_element",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstTypedName"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "CstQuantifierList_params_vec_delimiter"
+              },
+              {
+                "type": "FIELD",
+                "name": "CstQuantifierList_params_vec_element",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "CstTypedName"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "CstQuantifierList__rb": {
+      "type": "STRING",
+      "value": "]"
+    },
+    "CstQuantifierList": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "_lb",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstQuantifierList__lb"
           }
         },
         {
           "type": "FIELD",
-          "name": "_arrow",
+          "name": "params",
           "content": {
             "type": "SYMBOL",
-            "name": "CstLambdaExpr__arrow"
+            "name": "CstQuantifierList_params_vec_contents"
           }
         },
         {
           "type": "FIELD",
-          "name": "body",
+          "name": "_rb",
           "content": {
             "type": "SYMBOL",
-            "name": "CstExpr"
+            "name": "CstQuantifierList__rb"
           }
         }
       ]
@@ -563,69 +587,143 @@
       "value": "else"
     },
     "CstIfExpr": {
-      "type": "PREC_RIGHT",
-      "value": 1,
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "FIELD",
-            "name": "_if",
-            "content": {
-              "type": "SYMBOL",
-              "name": "CstIfExpr__if"
-            }
-          },
-          {
-            "type": "FIELD",
-            "name": "_lp",
-            "content": {
-              "type": "SYMBOL",
-              "name": "CstIfExpr__lp"
-            }
-          },
-          {
-            "type": "FIELD",
-            "name": "cond",
-            "content": {
-              "type": "SYMBOL",
-              "name": "CstExpr"
-            }
-          },
-          {
-            "type": "FIELD",
-            "name": "_rp",
-            "content": {
-              "type": "SYMBOL",
-              "name": "CstIfExpr__rp"
-            }
-          },
-          {
-            "type": "FIELD",
-            "name": "then_branch",
-            "content": {
-              "type": "SYMBOL",
-              "name": "CstExpr"
-            }
-          },
-          {
-            "type": "FIELD",
-            "name": "_else",
-            "content": {
-              "type": "SYMBOL",
-              "name": "CstIfExpr__else"
-            }
-          },
-          {
-            "type": "FIELD",
-            "name": "else_branch",
-            "content": {
-              "type": "SYMBOL",
-              "name": "CstExpr"
-            }
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "_if",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIfExpr__if"
           }
-        ]
-      }
+        },
+        {
+          "type": "FIELD",
+          "name": "_lp",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIfExpr__lp"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "cond",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstExpr"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "_rp",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIfExpr__rp"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "then_branch",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIfBranch"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "_else",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIfExpr__else"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "else_branch",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstElseBranch"
+          }
+        }
+      ]
+    },
+    "CstIfBranch_Closed": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstClosedExpr"
+          }
+        }
+      ]
+    },
+    "CstIfBranch_Name": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIdentifier"
+          }
+        }
+      ]
+    },
+    "CstIfBranch": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "CstIfBranch_Closed"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstIfBranch_Name"
+        }
+      ]
+    },
+    "CstElseBranch_Branch": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIfBranch"
+          }
+        }
+      ]
+    },
+    "CstElseBranch_If": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIfExpr"
+          }
+        }
+      ]
+    },
+    "CstElseBranch": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "CstElseBranch_Branch"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstElseBranch_If"
+        }
+      ]
     },
     "CstArrowExpr_Higher": {
       "type": "SEQ",
@@ -1633,6 +1731,19 @@
         }
       ]
     },
+    "CstClosedExpr_Lambda": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstLambdaExpr"
+          }
+        }
+      ]
+    },
     "CstClosedExpr": {
       "type": "CHOICE",
       "members": [
@@ -1647,6 +1758,10 @@
         {
           "type": "SYMBOL",
           "name": "CstClosedExpr_Array"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstClosedExpr_Lambda"
         }
       ]
     },
