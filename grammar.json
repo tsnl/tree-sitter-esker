@@ -1,5 +1,5 @@
 {
-  "name": "unit",
+  "name": "esker",
   "word": "CstIdentifier_name",
   "rules": {
     "source_file": {
@@ -13,24 +13,24 @@
             },
             {
               "type": "FIELD",
-              "name": "defs",
+              "name": "items",
               "content": {
                 "type": "SYMBOL",
-                "name": "CstFile_defs_vec_contents"
+                "name": "CstFile_items_vec_contents"
               }
             }
           ]
         }
       ]
     },
-    "CstFile_defs_vec_contents": {
+    "CstFile_items_vec_contents": {
       "type": "REPEAT1",
       "content": {
         "type": "FIELD",
-        "name": "CstFile_defs_vec_element",
+        "name": "CstFile_items_vec_element",
         "content": {
           "type": "SYMBOL",
-          "name": "CstBindDef"
+          "name": "CstItem"
         }
       }
     },
@@ -45,13 +45,52 @@
             },
             {
               "type": "FIELD",
-              "name": "defs",
+              "name": "items",
               "content": {
                 "type": "SYMBOL",
-                "name": "CstFile_defs_vec_contents"
+                "name": "CstFile_items_vec_contents"
               }
             }
           ]
+        }
+      ]
+    },
+    "CstItem_Bind": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstBindDef"
+          }
+        }
+      ]
+    },
+    "CstItem_Open": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstOpenDef"
+          }
+        }
+      ]
+    },
+    "CstItem": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "CstItem_Bind"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstItem_Open"
         }
       ]
     },
@@ -113,6 +152,43 @@
         }
       ]
     },
+    "CstOpenDef__open": {
+      "type": "STRING",
+      "value": "open"
+    },
+    "CstOpenDef__semi": {
+      "type": "STRING",
+      "value": ";"
+    },
+    "CstOpenDef": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "_open",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstOpenDef__open"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "operand",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstExpr"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "_semi",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstOpenDef__semi"
+          }
+        }
+      ]
+    },
     "CstExpr_Lambda": {
       "type": "SEQ",
       "members": [
@@ -135,6 +211,19 @@
           "content": {
             "type": "SYMBOL",
             "name": "CstLetExpr"
+          }
+        }
+      ]
+    },
+    "CstExpr_Open": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstOpenExpr"
           }
         }
       ]
@@ -188,6 +277,10 @@
         {
           "type": "SYMBOL",
           "name": "CstExpr_Let"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstExpr_Open"
         },
         {
           "type": "SYMBOL",
@@ -507,6 +600,63 @@
             "content": {
               "type": "SYMBOL",
               "name": "CstLetExpr__semi"
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "BLANK"
+              },
+              {
+                "type": "FIELD",
+                "name": "rest",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "CstExpr"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "CstOpenExpr__open": {
+      "type": "STRING",
+      "value": "open"
+    },
+    "CstOpenExpr__semi": {
+      "type": "STRING",
+      "value": ";"
+    },
+    "CstOpenExpr": {
+      "type": "PREC_RIGHT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "_open",
+            "content": {
+              "type": "SYMBOL",
+              "name": "CstOpenExpr__open"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "operand",
+            "content": {
+              "type": "SYMBOL",
+              "name": "CstExpr"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "_semi",
+            "content": {
+              "type": "SYMBOL",
+              "name": "CstOpenExpr__semi"
             }
           },
           {

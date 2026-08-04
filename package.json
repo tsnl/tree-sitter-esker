@@ -1,12 +1,12 @@
 {
-  "name": "tree-sitter-unit",
+  "name": "tree-sitter-esker",
   "version": "0.0.1",
-  "description": "Tree-sitter grammar for Unit (auto-generated from rust-sitter)",
+  "description": "Tree-sitter grammar for Esker (auto-generated from rust-sitter)",
   "main": "grammar.js",
   "tree-sitter": [
     {
-      "scope": "source.unit",
-      "file-types": ["unit"]
+      "scope": "source.esker",
+      "file-types": ["esk"]
     }
   ]
 }
