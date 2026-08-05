@@ -2066,6 +2066,43 @@
       "type": "STRING",
       "value": "{"
     },
+    "CstRecordExpr_fields_vec_delimiter": {
+      "type": "STRING",
+      "value": ","
+    },
+    "CstRecordExpr_fields_vec_contents": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "CstRecordExpr_fields_vec_element",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstField"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "CstRecordExpr_fields_vec_delimiter"
+              },
+              {
+                "type": "FIELD",
+                "name": "CstRecordExpr_fields_vec_element",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "CstField"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
     "CstRecordExpr__rb": {
       "type": "STRING",
       "value": "}"
@@ -2089,10 +2126,10 @@
             },
             {
               "type": "FIELD",
-              "name": "body",
+              "name": "fields",
               "content": {
                 "type": "SYMBOL",
-                "name": "CstRecordBody"
+                "name": "CstRecordExpr_fields_vec_contents"
               }
             }
           ]
@@ -2107,122 +2144,9 @@
         }
       ]
     },
-    "CstRecordBody_Fields_0_vec_delimiter": {
+    "CstField__colon": {
       "type": "STRING",
-      "value": ","
-    },
-    "CstRecordBody_Fields_0_vec_contents": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "CstRecordBody_Fields_0_vec_element",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstField"
-          }
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "CstRecordBody_Fields_0_vec_delimiter"
-              },
-              {
-                "type": "FIELD",
-                "name": "CstRecordBody_Fields_0_vec_element",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "CstField"
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "CstRecordBody_Fields": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstRecordBody_Fields_0_vec_contents"
-          }
-        }
-      ]
-    },
-    "CstRecordBody_FieldTypes_0_vec_delimiter": {
-      "type": "STRING",
-      "value": ","
-    },
-    "CstRecordBody_FieldTypes_0_vec_contents": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "CstRecordBody_FieldTypes_0_vec_element",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstTypedName"
-          }
-        },
-        {
-          "type": "REPEAT",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "CstRecordBody_FieldTypes_0_vec_delimiter"
-              },
-              {
-                "type": "FIELD",
-                "name": "CstRecordBody_FieldTypes_0_vec_element",
-                "content": {
-                  "type": "SYMBOL",
-                  "name": "CstTypedName"
-                }
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "CstRecordBody_FieldTypes": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstRecordBody_FieldTypes_0_vec_contents"
-          }
-        }
-      ]
-    },
-    "CstRecordBody": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "CstRecordBody_Fields"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstRecordBody_FieldTypes"
-        }
-      ]
-    },
-    "CstField__eq": {
-      "type": "STRING",
-      "value": "="
+      "value": ":"
     },
     "CstField": {
       "type": "SEQ",
@@ -2237,10 +2161,10 @@
         },
         {
           "type": "FIELD",
-          "name": "_eq",
+          "name": "_colon",
           "content": {
             "type": "SYMBOL",
-            "name": "CstField__eq"
+            "name": "CstField__colon"
           }
         },
         {
