@@ -176,7 +176,7 @@
         }
       ]
     },
-    "CstExpr_Function": {
+    "CstExpr_Lambda": {
       "type": "SEQ",
       "members": [
         {
@@ -184,7 +184,20 @@
           "name": "0",
           "content": {
             "type": "SYMBOL",
-            "name": "CstFunctionExpr"
+            "name": "CstLambdaExpr"
+          }
+        }
+      ]
+    },
+    "CstExpr_Pi": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstPiExpr"
           }
         }
       ]
@@ -215,6 +228,19 @@
         }
       ]
     },
+    "CstExpr_Match": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstMatchExpr"
+          }
+        }
+      ]
+    },
     "CstExpr_Apply": {
       "type": "SEQ",
       "members": [
@@ -228,7 +254,7 @@
         }
       ]
     },
-    "CstExpr_Compare": {
+    "CstExpr_Binary": {
       "type": "SEQ",
       "members": [
         {
@@ -236,7 +262,7 @@
           "name": "0",
           "content": {
             "type": "SYMBOL",
-            "name": "CstCompareExpr"
+            "name": "CstBinaryExpr"
           }
         }
       ]
@@ -246,7 +272,11 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "CstExpr_Function"
+          "name": "CstExpr_Lambda"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstExpr_Pi"
         },
         {
           "type": "SYMBOL",
@@ -258,11 +288,15 @@
         },
         {
           "type": "SYMBOL",
+          "name": "CstExpr_Match"
+        },
+        {
+          "type": "SYMBOL",
           "name": "CstExpr_Apply"
         },
         {
           "type": "SYMBOL",
-          "name": "CstExpr_Compare"
+          "name": "CstExpr_Binary"
         }
       ]
     },
@@ -299,16 +333,74 @@
         ]
       }
     },
-    "CstFunctionExpr": {
+    "CstLambdaExpr__lambda": {
+      "type": "STRING",
+      "value": "λ"
+    },
+    "CstLambdaExpr": {
       "type": "SEQ",
       "members": [
         {
           "type": "FIELD",
-          "name": "former",
+          "name": "_lambda",
           "content": {
             "type": "SYMBOL",
-            "name": "CstFunctionFormer"
+            "name": "CstLambdaExpr__lambda"
           }
+        },
+        {
+          "type": "FIELD",
+          "name": "binder",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstBinderExpr"
+          }
+        }
+      ]
+    },
+    "CstPiExpr__pi": {
+      "type": "STRING",
+      "value": "Π"
+    },
+    "CstPiExpr": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "_pi",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstPiExpr__pi"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "binder",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstBinderExpr"
+          }
+        }
+      ]
+    },
+    "CstBinderExpr": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "BLANK"
+            },
+            {
+              "type": "FIELD",
+              "name": "bang",
+              "content": {
+                "type": "SYMBOL",
+                "name": "CstBang"
+              }
+            }
+          ]
         },
         {
           "type": "CHOICE",
@@ -331,7 +423,7 @@
           "name": "params",
           "content": {
             "type": "SYMBOL",
-            "name": "CstFunctionParams"
+            "name": "CstParamPack"
           }
         },
         {
@@ -344,50 +436,20 @@
         }
       ]
     },
-    "CstFunctionFormer_Lambda_0": {
+    "CstBang__bang": {
       "type": "STRING",
-      "value": "λ"
+      "value": "!"
     },
-    "CstFunctionFormer_Lambda": {
+    "CstBang": {
       "type": "SEQ",
       "members": [
         {
           "type": "FIELD",
-          "name": "0",
+          "name": "_bang",
           "content": {
             "type": "SYMBOL",
-            "name": "CstFunctionFormer_Lambda_0"
+            "name": "CstBang__bang"
           }
-        }
-      ]
-    },
-    "CstFunctionFormer_Pi_0": {
-      "type": "STRING",
-      "value": "Π"
-    },
-    "CstFunctionFormer_Pi": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstFunctionFormer_Pi_0"
-          }
-        }
-      ]
-    },
-    "CstFunctionFormer": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "CstFunctionFormer_Lambda"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstFunctionFormer_Pi"
         }
       ]
     },
@@ -527,7 +589,7 @@
         }
       ]
     },
-    "CstFunctionParams_Paren": {
+    "CstParamPack_Paren": {
       "type": "SEQ",
       "members": [
         {
@@ -540,7 +602,7 @@
         }
       ]
     },
-    "CstFunctionParams_Record": {
+    "CstParamPack_Record": {
       "type": "SEQ",
       "members": [
         {
@@ -553,22 +615,59 @@
         }
       ]
     },
-    "CstFunctionParams": {
+    "CstParamPack": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "CstFunctionParams_Paren"
+          "name": "CstParamPack_Paren"
         },
         {
           "type": "SYMBOL",
-          "name": "CstFunctionParams_Record"
+          "name": "CstParamPack_Record"
         }
       ]
     },
     "CstParenPattern__lp": {
       "type": "STRING",
       "value": "("
+    },
+    "CstParenPattern_elems_vec_delimiter": {
+      "type": "STRING",
+      "value": ","
+    },
+    "CstParenPattern_elems_vec_contents": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "CstParenPattern_elems_vec_element",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstPatternElem"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "CstParenPattern_elems_vec_delimiter"
+              },
+              {
+                "type": "FIELD",
+                "name": "CstParenPattern_elems_vec_element",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "CstPatternElem"
+                }
+              }
+            ]
+          }
+        }
+      ]
     },
     "CstParenPattern__rp": {
       "type": "STRING",
@@ -593,10 +692,10 @@
             },
             {
               "type": "FIELD",
-              "name": "elem",
+              "name": "elems",
               "content": {
                 "type": "SYMBOL",
-                "name": "CstPatternElem"
+                "name": "CstParenPattern_elems_vec_contents"
               }
             }
           ]
@@ -627,7 +726,7 @@
           "name": "CstRecordPattern_fields_vec_element",
           "content": {
             "type": "SYMBOL",
-            "name": "CstTypedName"
+            "name": "CstRecordPatternField"
           }
         },
         {
@@ -644,7 +743,7 @@
                 "name": "CstRecordPattern_fields_vec_element",
                 "content": {
                   "type": "SYMBOL",
-                  "name": "CstTypedName"
+                  "name": "CstRecordPatternField"
                 }
               }
             ]
@@ -681,6 +780,60 @@
           "content": {
             "type": "SYMBOL",
             "name": "CstRecordPattern__rb"
+          }
+        }
+      ]
+    },
+    "CstRecordPatternField": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "BLANK"
+            },
+            {
+              "type": "FIELD",
+              "name": "alias",
+              "content": {
+                "type": "SYMBOL",
+                "name": "CstPatternAlias"
+              }
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "typed",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstTypedName"
+          }
+        }
+      ]
+    },
+    "CstPatternAlias__at": {
+      "type": "STRING",
+      "value": "@"
+    },
+    "CstPatternAlias": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIdentifier"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "_at",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstPatternAlias__at"
           }
         }
       ]
@@ -816,6 +969,597 @@
         }
       ]
     },
+    "CstMatchExpr__match": {
+      "type": "STRING",
+      "value": "match"
+    },
+    "CstMatchExpr__lp": {
+      "type": "STRING",
+      "value": "("
+    },
+    "CstMatchExpr__rp": {
+      "type": "STRING",
+      "value": ")"
+    },
+    "CstMatchExpr__lb": {
+      "type": "STRING",
+      "value": "{"
+    },
+    "CstMatchExpr_arms_vec_delimiter": {
+      "type": "STRING",
+      "value": ","
+    },
+    "CstMatchExpr_arms_vec_contents": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "CstMatchExpr_arms_vec_element",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstMatchArm"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "CstMatchExpr_arms_vec_delimiter"
+              },
+              {
+                "type": "FIELD",
+                "name": "CstMatchExpr_arms_vec_element",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "CstMatchArm"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "CstMatchExpr__rb": {
+      "type": "STRING",
+      "value": "}"
+    },
+    "CstMatchExpr": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "_match",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstMatchExpr__match"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "_lp",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstMatchExpr__lp"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "scrutinee",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstExpr"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "_rp",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstMatchExpr__rp"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "_lb",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstMatchExpr__lb"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "BLANK"
+            },
+            {
+              "type": "FIELD",
+              "name": "arms",
+              "content": {
+                "type": "SYMBOL",
+                "name": "CstMatchExpr_arms_vec_contents"
+              }
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "_rb",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstMatchExpr__rb"
+          }
+        }
+      ]
+    },
+    "CstMatchArm__arrow": {
+      "type": "STRING",
+      "value": "=>"
+    },
+    "CstMatchArm": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "pattern",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstPattern"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "_arrow",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstMatchArm__arrow"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "body",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstExpr"
+          }
+        }
+      ]
+    },
+    "CstPattern_Alias": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstAliasPattern"
+          }
+        }
+      ]
+    },
+    "CstPattern_Head": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstHeadPattern"
+          }
+        }
+      ]
+    },
+    "CstPattern": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "CstPattern_Alias"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstPattern_Head"
+        }
+      ]
+    },
+    "CstAliasPattern__at": {
+      "type": "STRING",
+      "value": "@"
+    },
+    "CstAliasPattern": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIdentifier"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "_at",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstAliasPattern__at"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "inner",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstHeadPattern"
+          }
+        }
+      ]
+    },
+    "CstHeadPattern_Label": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstLabelPattern"
+          }
+        }
+      ]
+    },
+    "CstHeadPattern_Literal": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstLiteralExpr"
+          }
+        }
+      ]
+    },
+    "CstHeadPattern_Name": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIdentifier"
+          }
+        }
+      ]
+    },
+    "CstHeadPattern_Record": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstFieldPatterns"
+          }
+        }
+      ]
+    },
+    "CstHeadPattern_Tuple": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstTuplePattern"
+          }
+        }
+      ]
+    },
+    "CstHeadPattern": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "CstHeadPattern_Label"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstHeadPattern_Literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstHeadPattern_Name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstHeadPattern_Record"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstHeadPattern_Tuple"
+        }
+      ]
+    },
+    "CstLabelPattern": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "head",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstLabelName"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "payload",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstPatternPayload"
+          }
+        }
+      ]
+    },
+    "CstPatternPayload_Paren": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstTuplePattern"
+          }
+        }
+      ]
+    },
+    "CstPatternPayload_Record": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstFieldPatterns"
+          }
+        }
+      ]
+    },
+    "CstPatternPayload": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "CstPatternPayload_Paren"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstPatternPayload_Record"
+        }
+      ]
+    },
+    "CstTuplePattern__lp": {
+      "type": "STRING",
+      "value": "("
+    },
+    "CstTuplePattern_elems_vec_delimiter": {
+      "type": "STRING",
+      "value": ","
+    },
+    "CstTuplePattern_elems_vec_contents": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "CstTuplePattern_elems_vec_element",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstPattern"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "CstTuplePattern_elems_vec_delimiter"
+              },
+              {
+                "type": "FIELD",
+                "name": "CstTuplePattern_elems_vec_element",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "CstPattern"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "CstTuplePattern__rp": {
+      "type": "STRING",
+      "value": ")"
+    },
+    "CstTuplePattern": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "_lp",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstTuplePattern__lp"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "BLANK"
+            },
+            {
+              "type": "FIELD",
+              "name": "elems",
+              "content": {
+                "type": "SYMBOL",
+                "name": "CstTuplePattern_elems_vec_contents"
+              }
+            }
+          ]
+        },
+        {
+          "type": "FIELD",
+          "name": "_rp",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstTuplePattern__rp"
+          }
+        }
+      ]
+    },
+    "CstFieldPatterns__lb": {
+      "type": "STRING",
+      "value": "{"
+    },
+    "CstFieldPatterns_fields_vec_delimiter": {
+      "type": "STRING",
+      "value": ","
+    },
+    "CstFieldPatterns_fields_vec_contents": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "CstFieldPatterns_fields_vec_element",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstFieldPattern"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "CstFieldPatterns_fields_vec_delimiter"
+              },
+              {
+                "type": "FIELD",
+                "name": "CstFieldPatterns_fields_vec_element",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "CstFieldPattern"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "CstFieldPatterns__rb": {
+      "type": "STRING",
+      "value": "}"
+    },
+    "CstFieldPatterns": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "_lb",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstFieldPatterns__lb"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "fields",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstFieldPatterns_fields_vec_contents"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "_rb",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstFieldPatterns__rb"
+          }
+        }
+      ]
+    },
+    "CstFieldPattern": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstIdentifier"
+          }
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "BLANK"
+            },
+            {
+              "type": "FIELD",
+              "name": "binding",
+              "content": {
+                "type": "SYMBOL",
+                "name": "CstFieldPatternBinding"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "CstFieldPatternBinding__colon": {
+      "type": "STRING",
+      "value": ":"
+    },
+    "CstFieldPatternBinding": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "_colon",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstFieldPatternBinding__colon"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "pattern",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstPattern"
+          }
+        }
+      ]
+    },
     "CstApplyExpr__dollar": {
       "type": "STRING",
       "value": "$"
@@ -831,7 +1575,7 @@
             "name": "func",
             "content": {
               "type": "SYMBOL",
-              "name": "CstCompareExpr"
+              "name": "CstBinaryExpr"
             }
           },
           {
@@ -853,7 +1597,7 @@
         ]
       }
     },
-    "CstCompareExpr_Higher": {
+    "CstBinaryExpr_Unary": {
       "type": "SEQ",
       "members": [
         {
@@ -861,12 +1605,12 @@
           "name": "0",
           "content": {
             "type": "SYMBOL",
-            "name": "CstShiftExpr"
+            "name": "CstUnaryExpr"
           }
         }
       ]
     },
-    "CstCompareExpr_Binary": {
+    "CstBinaryExpr_Compare": {
       "type": "SEQ",
       "members": [
         {
@@ -879,22 +1623,124 @@
         }
       ]
     },
-    "CstCompareExpr": {
+    "CstBinaryExpr_BitOr": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstBitOrBinary"
+          }
+        }
+      ]
+    },
+    "CstBinaryExpr_BitXor": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstBitXorBinary"
+          }
+        }
+      ]
+    },
+    "CstBinaryExpr_BitAnd": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstBitAndBinary"
+          }
+        }
+      ]
+    },
+    "CstBinaryExpr_Shift": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstShiftBinary"
+          }
+        }
+      ]
+    },
+    "CstBinaryExpr_Add": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstAddBinary"
+          }
+        }
+      ]
+    },
+    "CstBinaryExpr_Mul": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstMulBinary"
+          }
+        }
+      ]
+    },
+    "CstBinaryExpr": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "CstCompareExpr_Higher"
+          "name": "CstBinaryExpr_Unary"
         },
         {
           "type": "SYMBOL",
-          "name": "CstCompareExpr_Binary"
+          "name": "CstBinaryExpr_Compare"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstBinaryExpr_BitOr"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstBinaryExpr_BitXor"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstBinaryExpr_BitAnd"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstBinaryExpr_Shift"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstBinaryExpr_Add"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "CstBinaryExpr_Mul"
         }
       ]
     },
     "CstCompareBinary": {
       "type": "PREC_LEFT",
-      "value": 1,
+      "value": 2,
       "content": {
         "type": "SEQ",
         "members": [
@@ -903,7 +1749,7 @@
             "name": "lhs",
             "content": {
               "type": "SYMBOL",
-              "name": "CstCompareExpr"
+              "name": "CstBinaryExpr"
             }
           },
           {
@@ -919,7 +1765,7 @@
             "name": "rhs",
             "content": {
               "type": "SYMBOL",
-              "name": "CstShiftExpr"
+              "name": "CstBinaryExpr"
             }
           }
         ]
@@ -1056,48 +1902,9 @@
         }
       ]
     },
-    "CstShiftExpr_Higher": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstAddExpr"
-          }
-        }
-      ]
-    },
-    "CstShiftExpr_Binary": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstShiftBinary"
-          }
-        }
-      ]
-    },
-    "CstShiftExpr": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "CstShiftExpr_Higher"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstShiftExpr_Binary"
-        }
-      ]
-    },
-    "CstShiftBinary": {
+    "CstBitOrBinary": {
       "type": "PREC_LEFT",
-      "value": 1,
+      "value": 3,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1106,7 +1913,184 @@
             "name": "lhs",
             "content": {
               "type": "SYMBOL",
-              "name": "CstShiftExpr"
+              "name": "CstBinaryExpr"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "op",
+            "content": {
+              "type": "SYMBOL",
+              "name": "CstBitOrOp"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "rhs",
+            "content": {
+              "type": "SYMBOL",
+              "name": "CstBinaryExpr"
+            }
+          }
+        ]
+      }
+    },
+    "CstBitOrOp_Or_0": {
+      "type": "STRING",
+      "value": "|"
+    },
+    "CstBitOrOp_Or": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstBitOrOp_Or_0"
+          }
+        }
+      ]
+    },
+    "CstBitOrOp": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "CstBitOrOp_Or"
+        }
+      ]
+    },
+    "CstBitXorBinary": {
+      "type": "PREC_LEFT",
+      "value": 4,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "lhs",
+            "content": {
+              "type": "SYMBOL",
+              "name": "CstBinaryExpr"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "op",
+            "content": {
+              "type": "SYMBOL",
+              "name": "CstBitXorOp"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "rhs",
+            "content": {
+              "type": "SYMBOL",
+              "name": "CstBinaryExpr"
+            }
+          }
+        ]
+      }
+    },
+    "CstBitXorOp_Xor_0": {
+      "type": "STRING",
+      "value": "^"
+    },
+    "CstBitXorOp_Xor": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstBitXorOp_Xor_0"
+          }
+        }
+      ]
+    },
+    "CstBitXorOp": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "CstBitXorOp_Xor"
+        }
+      ]
+    },
+    "CstBitAndBinary": {
+      "type": "PREC_LEFT",
+      "value": 5,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "lhs",
+            "content": {
+              "type": "SYMBOL",
+              "name": "CstBinaryExpr"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "op",
+            "content": {
+              "type": "SYMBOL",
+              "name": "CstBitAndOp"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "rhs",
+            "content": {
+              "type": "SYMBOL",
+              "name": "CstBinaryExpr"
+            }
+          }
+        ]
+      }
+    },
+    "CstBitAndOp_And_0": {
+      "type": "STRING",
+      "value": "&"
+    },
+    "CstBitAndOp_And": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstBitAndOp_And_0"
+          }
+        }
+      ]
+    },
+    "CstBitAndOp": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "CstBitAndOp_And"
+        }
+      ]
+    },
+    "CstShiftBinary": {
+      "type": "PREC_LEFT",
+      "value": 6,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "lhs",
+            "content": {
+              "type": "SYMBOL",
+              "name": "CstBinaryExpr"
             }
           },
           {
@@ -1122,7 +2106,7 @@
             "name": "rhs",
             "content": {
               "type": "SYMBOL",
-              "name": "CstAddExpr"
+              "name": "CstBinaryExpr"
             }
           }
         ]
@@ -1175,48 +2159,9 @@
         }
       ]
     },
-    "CstAddExpr_Higher": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstMulExpr"
-          }
-        }
-      ]
-    },
-    "CstAddExpr_Binary": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstAddBinary"
-          }
-        }
-      ]
-    },
-    "CstAddExpr": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "CstAddExpr_Higher"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstAddExpr_Binary"
-        }
-      ]
-    },
     "CstAddBinary": {
       "type": "PREC_LEFT",
-      "value": 1,
+      "value": 7,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1225,7 +2170,7 @@
             "name": "lhs",
             "content": {
               "type": "SYMBOL",
-              "name": "CstAddExpr"
+              "name": "CstBinaryExpr"
             }
           },
           {
@@ -1241,7 +2186,7 @@
             "name": "rhs",
             "content": {
               "type": "SYMBOL",
-              "name": "CstMulExpr"
+              "name": "CstBinaryExpr"
             }
           }
         ]
@@ -1294,48 +2239,9 @@
         }
       ]
     },
-    "CstMulExpr_Higher": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstUnaryExpr"
-          }
-        }
-      ]
-    },
-    "CstMulExpr_Binary": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstMulBinary"
-          }
-        }
-      ]
-    },
-    "CstMulExpr": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "CstMulExpr_Higher"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstMulExpr_Binary"
-        }
-      ]
-    },
     "CstMulBinary": {
       "type": "PREC_LEFT",
-      "value": 1,
+      "value": 8,
       "content": {
         "type": "SEQ",
         "members": [
@@ -1344,7 +2250,7 @@
             "name": "lhs",
             "content": {
               "type": "SYMBOL",
-              "name": "CstMulExpr"
+              "name": "CstBinaryExpr"
             }
           },
           {
@@ -1360,7 +2266,7 @@
             "name": "rhs",
             "content": {
               "type": "SYMBOL",
-              "name": "CstUnaryExpr"
+              "name": "CstBinaryExpr"
             }
           }
         ]
@@ -1758,6 +2664,19 @@
         }
       ]
     },
+    "CstPrimaryExpr_Label": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstLabelExpr"
+          }
+        }
+      ]
+    },
     "CstPrimaryExpr_Literal": {
       "type": "SEQ",
       "members": [
@@ -1841,6 +2760,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "CstPrimaryExpr_Label"
+        },
+        {
+          "type": "SYMBOL",
           "name": "CstPrimaryExpr_Literal"
         },
         {
@@ -1894,19 +2817,6 @@
         }
       ]
     },
-    "CstLiteralKind_Bool": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstLitBool"
-          }
-        }
-      ]
-    },
     "CstLiteralKind_Number": {
       "type": "SEQ",
       "members": [
@@ -1938,10 +2848,6 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "CstLiteralKind_Bool"
-        },
-        {
-          "type": "SYMBOL",
           "name": "CstLiteralKind_Number"
         },
         {
@@ -1953,6 +2859,43 @@
     "CstParenExpr__lp": {
       "type": "STRING",
       "value": "("
+    },
+    "CstParenExpr_elements_vec_delimiter": {
+      "type": "STRING",
+      "value": ","
+    },
+    "CstParenExpr_elements_vec_contents": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "CstParenExpr_elements_vec_element",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstExpr"
+          }
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "CstParenExpr_elements_vec_delimiter"
+              },
+              {
+                "type": "FIELD",
+                "name": "CstParenExpr_elements_vec_element",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "CstExpr"
+                }
+              }
+            ]
+          }
+        }
+      ]
     },
     "CstParenExpr__rp": {
       "type": "STRING",
@@ -1977,10 +2920,10 @@
             },
             {
               "type": "FIELD",
-              "name": "content",
+              "name": "elements",
               "content": {
                 "type": "SYMBOL",
-                "name": "CstExpr"
+                "name": "CstParenExpr_elements_vec_contents"
               }
             }
           ]
@@ -2270,7 +3213,7 @@
     },
     "CstIdentifier_name": {
       "type": "PATTERN",
-      "value": "[\\p{XID_Start}_][\\p{XID_Continue}]*"
+      "value": "[\\p{Ll}\\p{Lo}\\p{Lm}\\p{Nl}_][\\p{XID_Continue}]*"
     },
     "CstIdentifier": {
       "type": "SEQ",
@@ -2285,11 +3228,49 @@
         }
       ]
     },
-    "CstLitBool_True_0": {
-      "type": "STRING",
-      "value": "true"
+    "CstLabelName_name": {
+      "type": "PATTERN",
+      "value": "[\\p{Lu}\\p{Lt}][\\p{XID_Continue}]*"
     },
-    "CstLitBool_True": {
+    "CstLabelName": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "name",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstLabelName_name"
+          }
+        }
+      ]
+    },
+    "CstLabelExpr": {
+      "type": "PREC_RIGHT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "head",
+            "content": {
+              "type": "SYMBOL",
+              "name": "CstLabelName"
+            }
+          },
+          {
+            "type": "FIELD",
+            "name": "payload",
+            "content": {
+              "type": "SYMBOL",
+              "name": "CstLabelPayload"
+            }
+          }
+        ]
+      }
+    },
+    "CstLabelPayload_Paren": {
       "type": "SEQ",
       "members": [
         {
@@ -2297,16 +3278,12 @@
           "name": "0",
           "content": {
             "type": "SYMBOL",
-            "name": "CstLitBool_True_0"
+            "name": "CstParenExpr"
           }
         }
       ]
     },
-    "CstLitBool_False_0": {
-      "type": "STRING",
-      "value": "false"
-    },
-    "CstLitBool_False": {
+    "CstLabelPayload_Record": {
       "type": "SEQ",
       "members": [
         {
@@ -2314,21 +3291,21 @@
           "name": "0",
           "content": {
             "type": "SYMBOL",
-            "name": "CstLitBool_False_0"
+            "name": "CstRecordExpr"
           }
         }
       ]
     },
-    "CstLitBool": {
+    "CstLabelPayload": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "CstLitBool_True"
+          "name": "CstLabelPayload_Paren"
         },
         {
           "type": "SYMBOL",
-          "name": "CstLitBool_False"
+          "name": "CstLabelPayload_Record"
         }
       ]
     },
@@ -2536,23 +3513,6 @@
         }
       ]
     },
-    "CstAtomType_Bool_0": {
-      "type": "STRING",
-      "value": "bool"
-    },
-    "CstAtomType_Bool": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstAtomType_Bool_0"
-          }
-        }
-      ]
-    },
     "CstAtomType_String_0": {
       "type": "STRING",
       "value": "string"
@@ -2646,10 +3606,6 @@
         {
           "type": "SYMBOL",
           "name": "CstAtomType_Float64"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstAtomType_Bool"
         },
         {
           "type": "SYMBOL",
