@@ -1580,6 +1580,19 @@
         }
       ]
     },
+    "CstHeadPattern_Negative": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "0",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstNegativePattern"
+          }
+        }
+      ]
+    },
     "CstHeadPattern_Literal": {
       "type": "SEQ",
       "members": [
@@ -1641,6 +1654,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "CstHeadPattern_Negative"
+        },
+        {
+          "type": "SYMBOL",
           "name": "CstHeadPattern_Literal"
         },
         {
@@ -1654,6 +1671,31 @@
         {
           "type": "SYMBOL",
           "name": "CstHeadPattern_Tuple"
+        }
+      ]
+    },
+    "CstNegativePattern__minus": {
+      "type": "STRING",
+      "value": "-"
+    },
+    "CstNegativePattern": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "FIELD",
+          "name": "_minus",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstNegativePattern__minus"
+          }
+        },
+        {
+          "type": "FIELD",
+          "name": "number",
+          "content": {
+            "type": "SYMBOL",
+            "name": "CstLitNumber"
+          }
         }
       ]
     },
