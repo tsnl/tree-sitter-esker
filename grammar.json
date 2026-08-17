@@ -81,19 +81,6 @@
         }
       ]
     },
-    "CstDecl_Bind": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstBindDecl"
-          }
-        }
-      ]
-    },
     "CstDecl_Open": {
       "type": "SEQ",
       "members": [
@@ -117,10 +104,6 @@
         {
           "type": "SYMBOL",
           "name": "CstDecl_Def"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstDecl_Bind"
         },
         {
           "type": "SYMBOL",
@@ -215,22 +198,6 @@
             "type": "SYMBOL",
             "name": "CstDefDecl__def"
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "BLANK"
-            },
-            {
-              "type": "FIELD",
-              "name": "bang",
-              "content": {
-                "type": "SYMBOL",
-                "name": "CstBang"
-              }
-            }
-          ]
         },
         {
           "type": "FIELD",
@@ -491,51 +458,6 @@
           "content": {
             "type": "SYMBOL",
             "name": "CstBinaryExpr"
-          }
-        }
-      ]
-    },
-    "CstBindDecl__eq": {
-      "type": "STRING",
-      "value": "="
-    },
-    "CstBindDecl__semi": {
-      "type": "STRING",
-      "value": ";"
-    },
-    "CstBindDecl": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "name",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstIdentifier"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "_eq",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstBindDecl__eq"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "init",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstExpr"
-          }
-        },
-        {
-          "type": "FIELD",
-          "name": "_semi",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstBindDecl__semi"
           }
         }
       ]
@@ -864,22 +786,6 @@
             },
             {
               "type": "FIELD",
-              "name": "bang",
-              "content": {
-                "type": "SYMBOL",
-                "name": "CstBang"
-              }
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "BLANK"
-            },
-            {
-              "type": "FIELD",
               "name": "quantifiers",
               "content": {
                 "type": "SYMBOL",
@@ -910,23 +816,6 @@
           "content": {
             "type": "SYMBOL",
             "name": "CstExpr"
-          }
-        }
-      ]
-    },
-    "CstBang__bang": {
-      "type": "STRING",
-      "value": "!"
-    },
-    "CstBang": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "_bang",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstBang__bang"
           }
         }
       ]
@@ -3276,22 +3165,6 @@
             "type": "SYMBOL",
             "name": "CstLiteralKind"
           }
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "BLANK"
-            },
-            {
-              "type": "FIELD",
-              "name": "type_hint",
-              "content": {
-                "type": "SYMBOL",
-                "name": "CstAtomType"
-              }
-            }
-          ]
         }
       ]
     },
