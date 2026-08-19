@@ -352,7 +352,7 @@
           "name": "result",
           "content": {
             "type": "SYMBOL",
-            "name": "CstFunctionResult"
+            "name": "CstBindingTypeAnnotation"
           }
         },
         {
@@ -378,62 +378,6 @@
             "type": "SYMBOL",
             "name": "CstFunctionDef__semi"
           }
-        }
-      ]
-    },
-    "CstFunctionResult_Name": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstIdentifier"
-          }
-        }
-      ]
-    },
-    "CstFunctionResult_AtomType": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstAtomType"
-          }
-        }
-      ]
-    },
-    "CstFunctionResult_Annotated": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "FIELD",
-          "name": "0",
-          "content": {
-            "type": "SYMBOL",
-            "name": "CstBindingTypeAnnotation"
-          }
-        }
-      ]
-    },
-    "CstFunctionResult": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "CstFunctionResult_Name"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstFunctionResult_AtomType"
-        },
-        {
-          "type": "SYMBOL",
-          "name": "CstFunctionResult_Annotated"
         }
       ]
     },
@@ -3606,7 +3550,7 @@
     },
     "CstIdentifier_name": {
       "type": "PATTERN",
-      "value": "[\\p{Ll}\\p{Lo}\\p{Lm}\\p{Nl}_][\\p{XID_Continue}]*"
+      "value": "[\\p{XID_Start}_][\\p{XID_Continue}]*"
     },
     "CstIdentifier": {
       "type": "SEQ",
@@ -3623,7 +3567,7 @@
     },
     "CstLabelName_name": {
       "type": "PATTERN",
-      "value": "[\\p{Lu}\\p{Lt}][\\p{XID_Continue}]*"
+      "value": "\\.[\\p{XID_Start}_][\\p{XID_Continue}]*"
     },
     "CstLabelName": {
       "type": "SEQ",
