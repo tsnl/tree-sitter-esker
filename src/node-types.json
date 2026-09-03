@@ -1,17 +1,12 @@
 [
   {
-    "type": "number",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "source_file",
     "named": true,
     "root": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
           "type": "lid",
@@ -25,7 +20,16 @@
     }
   },
   {
+    "type": "comment",
+    "named": true,
+    "extra": true
+  },
+  {
     "type": "lid",
+    "named": true
+  },
+  {
+    "type": "number",
     "named": true
   }
 ]
