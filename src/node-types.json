@@ -2,9 +2,20 @@
   {
     "type": "array_term",
     "named": true,
-    "fields": {},
+    "fields": {
+      "elems": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "term",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
@@ -17,20 +28,27 @@
   {
     "type": "chain_term",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "statement",
-          "named": true
-        },
-        {
-          "type": "term",
-          "named": true
-        }
-      ]
+    "fields": {
+      "prefix": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "statement",
+            "named": true
+          }
+        ]
+      },
+      "tail": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "term",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -79,72 +97,120 @@
   {
     "type": "declare",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "ident",
-          "named": true
-        },
-        {
-          "type": "term",
-          "named": true
-        }
-      ]
+    "fields": {
+      "ann": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "term",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ident",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
     "type": "define",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "ident",
-          "named": true
-        },
-        {
-          "type": "term",
-          "named": true
-        }
-      ]
+    "fields": {
+      "init": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "term",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "ident",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
     "type": "if_term",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "closed_term",
-          "named": true
-        },
-        {
-          "type": "term",
-          "named": true
-        }
-      ]
+    "fields": {
+      "cond": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "term",
+            "named": true
+          }
+        ]
+      },
+      "else": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "closed_term",
+            "named": true
+          }
+        ]
+      },
+      "then": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "closed_term",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
     "type": "lambda_term",
     "named": true,
-    "fields": {},
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "closed_term",
+            "named": true
+          }
+        ]
+      },
+      "params": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "declare",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "closed_term",
-          "named": true
-        },
         {
           "type": "declare",
           "named": true
@@ -155,30 +221,48 @@
   {
     "type": "paren_term",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "term",
-          "named": true
-        }
-      ]
+    "fields": {
+      "inner": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "term",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
     "type": "pi_term",
     "named": true,
-    "fields": {},
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "closed_term",
+            "named": true
+          }
+        ]
+      },
+      "params": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "declare",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
-        {
-          "type": "closed_term",
-          "named": true
-        },
         {
           "type": "declare",
           "named": true
@@ -216,10 +300,21 @@
   {
     "type": "record_term",
     "named": true,
-    "fields": {},
+    "fields": {
+      "fields": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "define",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
         {
           "type": "define",
@@ -231,10 +326,21 @@
   {
     "type": "record_type_term",
     "named": true,
-    "fields": {},
+    "fields": {
+      "fields": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "declare",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
-      "required": true,
+      "multiple": false,
+      "required": false,
       "types": [
         {
           "type": "declare",

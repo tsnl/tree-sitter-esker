@@ -8,26 +8,28 @@
 // @ts-check
 
 /**
+ * @param {string} field_name - name of the field to accumulate elements into
  * @param {RuleOrLiteral} element - rule for each element in the list
  * @param {RuleOrLiteral} sep - separator between elements (default: comma)
  * @returns {Rule}
  */
-function list(element, sep) {
+function list(field_name, element, sep) {
   return seq(
-    repeat(seq(element, sep)),
+    repeat(seq(field(field_name, element), sep)),
     optional(element)
   )
 }
 
 /**
+ * @param {string} field_name - name of the field to accumulate elements into
  * @param {RuleOrLiteral} element - rule for each element in the list
  * @param {RuleOrLiteral} sep - separator between elements (default: comma)
  * @returns {Rule}
  */
-function list1(element, sep) {
+function list1(field_name, element, sep) {
   return seq(
-    element,
-    optional(seq(sep, list(element, sep)))
+    field(field_name, element),
+    optional(seq(sep, list(field_name, element, sep)))
   )
 }
 
@@ -50,10 +52,18 @@ export default grammar({
       seq(choice($.define, $.declare), ";"),
 
     define: $ =>
-      seq($.ident, "=", $.term),
+      seq(
+        field("name", $.ident),
+        "=",
+        field("init", $.term)
+      ),
 
     declare: $ =>
-      seq($.ident, ":", $.term),
+      seq(
+        field("name", $.ident),
+        ":",
+        field("ann", $.term)
+      ),
 
     //
     // Term
@@ -74,19 +84,19 @@ export default grammar({
         $.unit_term,
       ),
     lambda_term: $ =>
-      seq("(", list($.declare, ","), ")", "=>", $.closed_term),
+      seq("(", list("params", $.declare, ","),")","=>",field("body", $.closed_term)),
     pi_term: $ =>
-      seq("(", list($.declare, ","), ")", "->", $.closed_term),
+      seq("(", list("params", $.declare, ","), ")", "->", field("body", $.closed_term)),
     paren_term: $ =>
-      seq("(", $.term, ")"),
+      seq("(", field("inner", $.term), ")"),
     array_term: $ =>
-      seq("[", list($.term, ","), "]"),
+      seq("[", list("elems", $.term, ","), "]"),
     record_term: $ =>
-      seq("{", list1($.define, ","), "}"),
+      seq("{", list1("fields", $.define, ","), "}"),
     record_type_term: $ =>
-      seq("{", list1($.declare, ","), "}"),
+      seq("{", list1("fields", $.declare, ","), "}"),
     chain_term: $ =>
-      seq("{", repeat($.statement), $.term, "}"),
+      seq("{", field("prefix", repeat($.statement)), field("tail", $.term), "}"),
     unit_term: $ =>
       seq("{", "}"),
 
@@ -98,7 +108,13 @@ export default grammar({
         $.if_term,
       ),
     if_term: $ =>
-      seq("if", $.term, $.closed_term, "else", $.closed_term),
+      seq(
+        "if",
+        field("cond", $.term),
+        field("then", $.closed_term),
+        "else",
+        field("else", $.closed_term)
+      ),
 
     // TODO: postfix_term
 
