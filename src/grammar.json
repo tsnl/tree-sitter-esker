@@ -3,8 +3,34 @@
   "name": "esker",
   "rules": {
     "source_file": {
-      "type": "STRING",
-      "value": "hello"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "lid"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "number"
+        }
+      ]
+    },
+    "lid": {
+      "type": "PATTERN",
+      "value": "[_]*[a-z][a-zA-Z0-9_]*"
+    },
+    "number": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "(?i)[0-9_]+\\.[0-9_]+(e[+-]?[0-9_]+)?"
+        },
+        {
+          "type": "PATTERN",
+          "value": "(?i)0x[0-9a-f_]+"
+        }
+      ]
     }
   },
   "extras": [
