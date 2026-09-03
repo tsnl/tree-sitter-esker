@@ -86,7 +86,7 @@ export default grammar({
     record_type_term: $ =>
       seq("{", list1($.declare, ","), "}"),
     chain_term: $ =>
-      seq("{", list($.statement, ";"), $.term, "}"),
+      seq("{", repeat($.statement), $.term, "}"),
     unit_term: $ =>
       seq("{", "}"),
 
